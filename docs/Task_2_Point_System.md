@@ -30,8 +30,11 @@ This covers point acquisition (Charging/Rewards) and consumption (Payments for F
 *   **Security**: Server-side validation of point sufficiency before processing any request.
 
 ## 4. Deliverables
-*   [ ] Database Schema for `Transactions`.
-*   [ ] Backend Service method `processTransaction(userId, amount, type, metadata)`.
-*   [ ] API Endpoint `GET /api/points/history` for users to view their wallet activity.
-*   [ ] Logic hook to award Sign-up bonus.
-*   [ ] Start implementing the "Mock Payment" flow for testing charging points without real PG.
+### 4.1 Database & Core Logic
+*   [ ] **Schema Design**: Create `Transactions` table (Id, UserId, Amount, Type, RelatedId).
+*   [ ] **Transaction Service**: Implement `processTransaction()` with ACID compliance (using DB transactions).
+*   [ ] **Signup Bonus**: Add hook in Auth service to trigger `processTransaction(user, +1000, SIGNUP_BONUS)` on creation.
+
+### 4.2 API & Integration
+*   [ ] **History API**: Implement `GET /api/points/history` with pagination.
+*   [ ] **Mock Payment**: Implement `POST /api/payments/mock` to simulate charging points (for Dev/Testing).

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grim - Clean Minimalist Concept</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        primary: '#3b82f6', // Blue 500
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        body {
+            background-color: #f8fafc;
+        }
+        
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-800 font-sans">
+
+    <!-- Top Navigation -->
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-serif font-bold text-slate-900">Grim.</a>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-slate-600 hover:text-primary font-medium">피드백 찾기</a>
+                    <a href="#" class="text-slate-600 hover:text-primary font-medium">멘토</a>
+                    <a href="#" class="text-slate-600 hover:text-primary font-medium">커뮤니티</a>
+                </nav>
+
+                <!-- Auth / CTA -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900 hidden sm:block">로그인</a>
+                    <a href="#" class="bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors shadow-soft">
+                        시작하기
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-white pt-16 pb-20 px-4 sm:px-6 border-b border-slate-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-wide uppercase mb-4">
+                미대 입시 멘토링 플랫폼
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mb-6 font-serif">
+                당신의 그림, <br class="sm:hidden" />
+                <span class="text-primary italic">전문가의 눈</span>으로 완성하세요.
+            </h1>
+            <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                홍익대, 한예종 출신 멘토들이 직접 그림 위에 덧그려 피드백합니다.
+                막막했던 입시 그림, 1:1 코칭으로 해결책을 찾으세요.
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="text" 
+                    class="block w-full pl-11 pr-4 py-4 bg-slate-50 border-0 rounded-2xl text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-primary focus:bg-white transition-all shadow-inner" 
+                    placeholder="희망 대학, 전공, 멘토 이름을 검색해보세요">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+        
+        <!-- Section Header -->
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">추천 멘토</h2>
+                <p class="text-slate-500 mt-1">회원님과 같은 전공의 검증된 멘토입니다.</p>
+            </div>
+            <a href="#" class="text-primary font-medium hover:underline text-sm">모두 보기 -></a>
+        </div>
+
+        <!-- Mentors Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            
+            <!-- Mentor Card 1 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-soft card-hover cursor-pointer group">
+                <div class="flex items-center space-x-4 mb-4">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jude" alt="" class="w-14 h-14 rounded-full bg-slate-100 object-cover">
+                    <div>
+                        <h3 class="font-bold text-slate-900">이준호 멘토</h3>
+                        <div class="flex items-center text-xs text-slate-500 mt-1">
+                            <span class="bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-medium mr-2">인증됨</span>
+                            <span>홍익대 디자인</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-2">
+                    기초디자인 구도와 질감 표현 위주로 피드백합니다. 빠르고 정확하게 짚어드립니다.
+                </p>
+                <div class="flex justify-between items-center text-sm border-t border-slate-50 pt-4">
+                    <div class="flex items-center text-yellow-500">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <span class="ml-1 font-bold text-slate-900">4.9</span>
+                        <span class="text-slate-400 font-normal ml-1">(128)</span>
+                    </div>
+                    <span class="text-slate-900 font-bold">3,000 P</span>
+                </div>
+            </div>
+
+             <!-- Mentor Card 2 -->
+             <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-soft card-hover cursor-pointer">
+                <div class="flex items-center space-x-4 mb-4">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="" class="w-14 h-14 rounded-full bg-slate-100 object-cover">
+                    <div>
+                        <h3 class="font-bold text-slate-900">김민지 멘토</h3>
+                        <div class="flex items-center text-xs text-slate-500 mt-1">
+                            <span class="bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-medium mr-2">인증됨</span>
+                            <span>이화여대 서양화</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-2">
+                    인체 수채화의 톤과 구조를 잡아드립니다. 감성적인 터치보다는 탄탄한 기본기 위주!
+                </p>
+                <div class="flex justify-between items-center text-sm border-t border-slate-50 pt-4">
+                    <div class="flex items-center text-yellow-500">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                        <span class="ml-1 font-bold text-slate-900">5.0</span>
+                        <span class="text-slate-400 font-normal ml-1">(42)</span>
+                    </div>
+                    <span class="text-slate-900 font-bold">3,500 P</span>
+                </div>
+            </div>
+
+            <!-- More cards placeholder -->
+            <div class="bg-slate-50 rounded-2xl p-6 border border-dashed border-slate-300 flex flex-col justify-center items-center text-center card-hover cursor-pointer">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm mb-3">
+                    <svg class="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <h3 class="font-medium text-slate-900">멘토 더 찾기</h3>
+                <p class="text-xs text-slate-500 mt-1">전공별로 찾아보세요</p>
+            </div>
+
+        </div>
+
+        <!-- Section Header -->
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">최신 피드백</h2>
+                <p class="text-slate-500 mt-1">다른 학생들은 어떤 조언을 받고 있을까요?</p>
+            </div>
+            <a href="#" class="text-primary font-medium hover:underline text-sm">갤러리 가기 -></a>
+        </div>
+
+        <!-- Feed List (Clean List View) -->
+        <div class="bg-white rounded-3xl border border-slate-100 shadow-soft overflow-hidden">
+            <!-- List Item 1 -->
+            <div class="p-6 border-b border-slate-100 hover:bg-slate-50 transition-colors cursor-pointer flex gap-6">
+                <div class="w-32 h-24 bg-slate-200 rounded-lg flex-shrink-0 overflow-hidden">
+                    <img src="https://via.placeholder.com/150" class="w-full h-full object-cover grayscale opacity-80" alt="thumbnail">
+                </div>
+                <div class="flex-1 py-1">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded-md font-medium">기초디자인</span>
+                        <span class="text-xs text-slate-400">20분 전</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">투명체 질감 묘사가 너무 탁하게 나옵니다.</h3>
+                    <p class="text-slate-600 text-sm line-clamp-1">
+                        유리컵을 그렸는데 뒤에 비치는 물체가 너무 선명해서 유리 같지가 않아요. 어떻게 고쳐야 할까요?
+                    </p>
+                    <div class="flex items-center mt-3 gap-4">
+                        <div class="flex items-center gap-1.5">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jude" class="w-5 h-5 rounded-full">
+                            <span class="text-xs text-slate-700 font-medium">이준호 멘토 답변 완료</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List Item 2 -->
+            <div class="p-6 hover:bg-slate-50 transition-colors cursor-pointer flex gap-6">
+                 <div class="w-32 h-24 bg-slate-200 rounded-lg flex-shrink-0 overflow-hidden">
+                    <img src="https://via.placeholder.com/150" class="w-full h-full object-cover grayscale opacity-80" alt="thumbnail">
+                </div>
+                <div class="flex-1 py-1">
+                     <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded-md font-medium">인체수채화</span>
+                        <span class="text-xs text-slate-400">1시간 전</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">손 구조가 어색한 것 같아요</h3>
+                    <p class="text-slate-600 text-sm line-clamp-1">
+                        주먹 쥔 손을 그렸는데 손가락 마디 꺾이는 부분이 자연스럽지 않습니다.
+                    </p>
+                    <div class="flex items-center mt-3 gap-4">
+                        <div class="flex items-center gap-1.5">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" class="w-5 h-5 rounded-full">
+                            <span class="text-xs text-slate-700 font-medium">김민지 멘토 답변 완료</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

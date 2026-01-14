@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code temporary files
+tmpclaude-*-cwd/
+tmpclaude-*.cwd/
+
+# spec-kit and specification files
+.claude/
+.specify/
+CLAUDE.md
+docs/recommendation.md

@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grim - 미술 입시 커뮤니티
 
-## Getting Started
+NextAuth.js 기반 사용자 인증 시스템이 구현된 미술 입시생을 위한 커뮤니티 및 멘토링 플랫폼입니다.
 
-First, run the development server:
+## 🎯 Implemented Features (MVP)
+
+### ✅ Phase 1-5 Complete
+
+- **User Authentication**
+  - Email/password registration and login
+  - Google OAuth integration
+  - Kakao OAuth integration
+  - JWT session management (24-hour expiry)
+  - Password hashing with bcrypt (12 rounds)
+  - Account lockout after 5 failed login attempts (15-minute lock)
+
+- **Role-Based Access Control**
+  - Three user roles: STUDENT, MENTOR, ADMIN
+  - MentorStatus system: PENDING, ACTIVE, REJECTED
+  - Protected routes with role-based permissions
+  - Dynamic navigation based on user role
+
+- **Protected Routes**
+  - Middleware for authentication check
+  - Automatic redirect to login for unauthenticated users
+  - CallbackUrl preservation for post-login redirect
+  - Open redirect prevention
+
+- **Audit Logging**
+  - Security event tracking (REGISTER, LOGIN_SUCCESS, LOGIN_FAILED)
+  - IP address and user agent logging
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript 5.x
+- **Authentication**: NextAuth.js v5 (Auth.js)
+- **Database**: PostgreSQL + Prisma ORM v6
+- **Validation**: Zod
+- **Styling**: Tailwind CSS
+- **Password Hashing**: bcryptjs
+
+## 📋 Prerequisites
+
+- Node.js 20+ (npm included)
+- PostgreSQL 14+
+- Google OAuth credentials (optional)
+- Kakao OAuth credentials (optional)
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Database Setup
+
+Create a PostgreSQL database and update `.env.local` with your connection string.
+
+### 3. Run Database Migrations
+
+```bash
+npx prisma migrate dev
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔐 Security Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Password requirements: min 8 characters, alphanumeric
+- bcrypt hashing with 12 rounds
+- Account lockout after 5 failed attempts (15-minute duration)
+- JWT tokens with 24-hour expiration
+- CSRF protection via NextAuth
+- Open redirect prevention in callbackUrl
+- Audit logging for security events
 
-## Learn More
+## 👥 User Roles
 
-To learn more about Next.js, take a look at the following resources:
+### STUDENT (Default)
+- Access to community pages and settings
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### MENTOR
+- All STUDENT permissions
+- Access to feedback page (only when status = ACTIVE)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ADMIN
+- Full access to all pages
+- User management capabilities
+- Mentor approval workflow
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is part of the Grim platform development.

@@ -34,8 +34,12 @@ Must establish credibility instantly.
     *   Mentors need a toggle to "Hide Profile" or set "Not Taking Requests" status.
 
 ## 4. Deliverables
-*   [ ] API `GET /api/mentors`: Supports query params `?major=design&university=hongik&sort=rating`.
-*   [ ] API `GET /api/mentors/:id`: Detialed profile with stats.
-*   [ ] API `GET /api/mentors/:id/portfolio`: Public feedback items.
-*   [ ] Frontend: "Find Mentor" Page with Sidebar Filters and Card Grid results.
-*   [ ] Frontend: Mentor Detail Page with sticky "Request Request" button.
+### 4.1 Backend APIs
+*   [ ] **Search API**: Implement `GET /api/mentors` with filters (major, university) and sorting.
+*   [ ] **Profile API**: Implement `GET /api/mentors/:id` (Basic Info + Stats).
+*   [ ] **Portfolio API**: Implement `GET /api/mentors/:id/portfolio` (Recent feedback items).
+
+### 4.2 Frontend Components
+*   [ ] **Mentor Card**: Reusable card component showing Avatar, Name, Badge, Major, Rating.
+*   [ ] **Discovery Page**: Layout with Sidebar (Filters) and Main Grid (Mentor Cards).
+*   [ ] **Profile Detail**: Full page view with Portfolio Grid and Sticky "Request Feedback" CTA.

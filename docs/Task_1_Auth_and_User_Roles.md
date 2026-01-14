@@ -36,8 +36,13 @@ This forms the foundation of the platform, distinguishing between **Students**, 
 *   **Scalability**: Design the role system to be extensible (e.g., potential future 'Pro Mentor' or 'Organization' roles).
 
 ## 4. Deliverables
-*   [ ] Database Schema creation/migration for Users and Profiles.
-*   [ ] Authentication API (Signup/Login/Logout).
-*   [ ] File Upload API for mentor documents.
-*   [ ] Admin API for reviewing and updating mentor status.
-*   [ ] Frontend: Login Page, Signup Page (Role selection), Mentor Application Form, Admin Review Panel.
+### 4.1 Backend & Database
+*   [ ] **Schema Design**: Create `Users` table (Role, Status, Points) and `MentorProfiles` table (Bio, Doc URLs).
+*   [ ] **Auth API**: Implement `POST /auth/signup`, `POST /auth/login`, `POST /auth/logout` (JWT/Session).
+*   [ ] **Mentor Logic**: Implement `POST /api/mentor/apply` (File Upload + Status change to PENDING).
+*   [ ] **Admin Logic**: Implement `GET /api/admin/mentors/pending` and `POST /api/admin/mentors/:id/approve`.
+
+### 4.2 Frontend Interfaces
+*   [ ] **Auth Pages**: Login Page & Signup Page (with Role Selection Tab).
+*   [ ] **Onboarding**: Mentor Application Form with Multi-file Upload.
+*   [ ] **Admin Dashboard**: Simple table view to list pending mentors and Approve/Reject buttons.
