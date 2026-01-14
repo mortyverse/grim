@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grim - Integrated Design Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        neutral: {
+                            900: '#0f172a', // Slate 900
+                            800: '#1e293b',
+                            100: '#f1f5f9',
+                            50: '#f8fafc',
+                        },
+                        brand: {
+                            500: '#0f172a', // Main Brand Color (Dark Slate)
+                            600: '#020617',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Tab Transitions */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Tool UI Specifics */
+        .canvas-bg {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Navigation -->
+    <nav class="h-16 bg-white/90 backdrop-blur-md border-b border-gray-200 z-50 flex-shrink-0">
+        <div class="h-full max-w-[1600px] mx-auto px-6 flex justify-between items-center">
+            <!-- Brand -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('landing')">
+                <div class="w-8 h-8 bg-neutral-900 rounded-lg flex items-center justify-center text-white font-bold text-lg">G</div>
+                <span class="font-bold text-xl tracking-tight">Grim</span>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="hidden md:flex bg-gray-100 p-1 rounded-lg">
+                <button onclick="switchTab('landing')" class="nav-tab px-4 py-1.5 text-sm font-medium rounded-md transition-all text-gray-600 hover:text-gray-900" id="tab-btn-landing">홈</button>
+                <button onclick="switchTab('mentors')" class="nav-tab px-4 py-1.5 text-sm font-medium rounded-md transition-all text-gray-600 hover:text-gray-900" id="tab-btn-mentors">멘토 찾기</button>
+                <button onclick="switchTab('gallery')" class="nav-tab px-4 py-1.5 text-sm font-medium rounded-md transition-all text-gray-600 hover:text-gray-900" id="tab-btn-gallery">갤러리</button>
+                <button onclick="switchTab('tool')" class="nav-tab px-4 py-1.5 text-sm font-medium rounded-md transition-all text-gray-600 hover:text-gray-900" id="tab-btn-tool">워크스페이스</button>
+            </div>
+
+            <!-- User Profile -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-200 rounded-full">
+                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                    <span class="text-xs font-medium text-gray-600">1,250 P</span>
+                </div>
+                <button class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden border border-gray-300">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto relative bg-gray-50">
+
+        <!-- 1. LANDING PAGE VIEW -->
+        <div id="landing" class="tab-content active h-full">
+            <div class="max-w-7xl mx-auto px-6 pt-20 pb-20">
+                <!-- Hero -->
+                <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-in-up">
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold mb-6 border border-blue-100">
+                        <span>🚀</span> 2026학년도 수시 합격 데이터 업데이트
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold text-neutral-900 tracking-tight leading-tight mb-6">
+                        미대 입시의 모든 해답,<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Grim</span>에 있습니다.
+                    </h1>
+                    <p class="text-lg text-gray-500 mb-8 leading-relaxed">
+                        홍익대, 서울대, 한예종 멘토들의 1:1 드로잉 피드백.<br>
+                        합격작 데이터베이스와 함께 당신의 실기력을 완성하세요.
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <button onclick="switchTab('mentors')" class="bg-neutral-900 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-neutral-800 transition-shadow shadow-lg shadow-neutral-900/20">
+                            멘토 찾기
+                        </button>
+                        <button onclick="switchTab('gallery')" class="bg-white text-neutral-900 border border-gray-200 px-8 py-3.5 rounded-xl font-semibold hover:bg-gray-50 transition-colors">
+                            합격작 보기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Preview (Glassmorphism) -->
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 bg-white aspect-[16/9] max-w-5xl mx-auto group cursor-pointer" onclick="switchTab('tool')">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Dashboard">
+                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 via-transparent to-transparent"></div>
+                    
+                    <!-- Floating UI Elements -->
+                    <div class="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+                        <div class="glass-panel p-6 rounded-2xl max-w-lg">
+                            <h3 class="text-lg font-bold text-gray-900 mb-1">실시간 1:1 드로잉 피드백</h3>
+                            <p class="text-sm text-gray-600">멘토가 직접 학생의 그림 위에 오버레이하여 수정 방향을 제시합니다. 텍스트로는 설명하기 힘든 미묘한 톤과 형태를 눈으로 확인하세요.</p>
+                        </div>
+                        <div class="glass-panel px-4 py-2 rounded-lg flex items-center gap-2">
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                            </span>
+                            <span class="text-sm font-bold text-gray-800">54명의 멘토가 접속 중</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. MENTOR FINDING VIEW -->
+        <div id="mentors" class="tab-content h-full bg-white">
+            <div class="flex h-full">
+                <!-- Sidebar Filters -->
+                <aside class="w-64 border-r border-gray-200 p-6 hidden lg:block overflow-y-auto">
+                    <h3 class="font-bold text-gray-900 mb-6">필터</h3>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">전공</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" checked class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">디자인 (시각/산업/패션)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">서양화/인체수채화</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">동양화</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">조소</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">학교</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" checked class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">홍익대학교</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">서울대학교</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="rounded border-gray-300 text-neutral-900 focus:ring-neutral-900">
+                                <span class="text-sm text-gray-600">국민대학교</span>
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Mentor Grid -->
+                <div class="flex-1 p-6 md:p-8 overflow-y-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-neutral-900">추천 멘토 <span class="text-gray-400 text-lg font-normal ml-2">128명</span></h2>
+                        <select class="bg-gray-50 border border-gray-200 rounded-lg text-sm px-3 py-2 outline-none focus:border-neutral-900">
+                            <option>추천순</option>
+                            <option>평점순</option>
+                            <option>가격 낮은순</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Mentor Card 1 -->
+                        <div class="border border-gray-200 rounded-xl p-5 hover:border-gray-400 hover:shadow-lg transition-all cursor-pointer bg-white group" onclick="switchTab('tool')">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jude" class="w-16 h-16 rounded-full bg-gray-100 border border-gray-200">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h3 class="font-bold text-lg text-gray-900">이준호</h3>
+                                        <span class="bg-blue-100 text-blue-700 text-[10px] px-1.5 py-0.5 rounded font-bold">인증됨</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mb-2">홍익대학교 시각디자인과 3학년</p>
+                                    <div class="flex items-center gap-1 text-amber-500 text-sm font-bold">
+                                        <span>★ 4.9</span>
+                                        <span class="text-gray-400 font-normal">(52)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">기초디자인 구도와 양감 위주로 피드백합니다. 입시 미술 학원 강사 경력 2년 있습니다.</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">#기초디자인</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">#소묘</span>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-400">1회 피드백</span>
+                                <span class="font-bold text-neutral-900">3,000 P</span>
+                            </div>
+                        </div>
+
+                         <!-- Mentor Card 2 -->
+                         <div class="border border-gray-200 rounded-xl p-5 hover:border-gray-400 hover:shadow-lg transition-all cursor-pointer bg-white group">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" class="w-16 h-16 rounded-full bg-gray-100 border border-gray-200">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h3 class="font-bold text-lg text-gray-900">박수진</h3>
+                                        <span class="bg-blue-100 text-blue-700 text-[10px] px-1.5 py-0.5 rounded font-bold">인증됨</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mb-2">이화여대 서양화과 졸업</p>
+                                    <div class="flex items-center gap-1 text-amber-500 text-sm font-bold">
+                                        <span>★ 5.0</span>
+                                        <span class="text-gray-400 font-normal">(120)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">인체 수채화 전문입니다. 구조와 해부학적 지식을 바탕으로 정확하게 짚어드립니다.</p>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">#인체수채화</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">#정물</span>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-400">1회 피드백</span>
+                                <span class="font-bold text-neutral-900">5,000 P</span>
+                            </div>
+                        </div>
+
+                        <!-- Mentor Card 3 -->
+                        <div class="border border-gray-200 rounded-xl p-5 hover:border-gray-400 hover:shadow-lg transition-all cursor-pointer bg-white group">
+                            <div class="flex items-start gap-4 mb-4">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mike" class="w-16 h-16 rounded-full bg-gray-100 border border-gray-200">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <h3 class="font-bold text-lg text-gray-900">최민수</h3>
+                                        <span class="bg-gray-100 text-gray-500 text-[10px] px-1.5 py-0.5 rounded font-bold">승인 대기</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mb-2">서울대학교 조소과 4학년</p>
+                                    <div class="flex items-center gap-1 text-gray-400 text-sm font-bold">
+                                        <span>신규 멘토</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">입체 조형과 공간감에 대해 이야기합니다. 흙 작업 사진을 보내주시면 피드백 드립니다.</p>
+                             <div class="flex items-center gap-2 mb-4">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">#조소</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">#모델링</span>
+                            </div>
+                            <div class="pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <span class="text-xs text-gray-400">1회 피드백</span>
+                                <span class="font-bold text-neutral-900">2,500 P</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. GALLERY FEED VIEW -->
+        <div id="gallery" class="tab-content h-full">
+            <div class="max-w-[1600px] mx-auto px-6 py-8">
+                <div class="columns-1 md:columns-3 lg:columns-4 gap-6 space-y-6">
+                    <!-- Gallery Item 1 -->
+                    <div class="break-inside-avoid bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2070&auto=format&fit=crop" class="w-full h-auto object-cover">
+                            <div class="absolute top-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Before / After</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-900 text-sm mb-1 line-clamp-1">금속 질감 표현 피드백 부탁드려요</h3>
+                            <div class="flex items-center gap-2 mt-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jude" class="w-5 h-5 rounded-full">
+                                <span class="text-xs text-gray-500">이준호 멘토 답변 완료</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 2 -->
+                    <div class="break-inside-avoid bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group">
+                        <div class="relative">
+                             <div class="w-full aspect-[3/4] bg-gray-200 flex items-center justify-center text-gray-400">Artwork Placeholder</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-900 text-sm mb-1 line-clamp-1">인체 손 구조가 어색해요</h3>
+                            <div class="flex items-center gap-2 mt-3">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" class="w-5 h-5 rounded-full">
+                                <span class="text-xs text-gray-500">박수진 멘토 답변 완료</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 3 -->
+                    <div class="break-inside-avoid bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group">
+                        <div class="relative">
+                            <div class="w-full aspect-square bg-gray-200 flex items-center justify-center text-gray-400">Sketch</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-900 text-sm mb-1 line-clamp-1">구도 평가 부탁드립니다</h3>
+                            <div class="flex items-center gap-2 mt-3">
+                                <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+                                <span class="text-xs text-gray-500">답변 대기중</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More items... -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. TOOL (WORKSPACE) VIEW -->
+        <div id="tool" class="tab-content h-full">
+            <div class="flex h-full bg-[#1e1e1e] text-[#cccccc]">
+                <!-- Left Toolbar -->
+                <aside class="w-14 bg-[#252526] border-r border-black flex flex-col items-center py-4 gap-4 z-10 flex-shrink-0">
+                    <button class="w-9 h-9 rounded bg-[#007acc] text-white flex items-center justify-center shadow-lg">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                    </button>
+                    <button class="w-9 h-9 rounded hover:bg-[#3e3e42] text-gray-400 hover:text-white flex items-center justify-center transition-colors">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                    <button class="w-9 h-9 rounded hover:bg-[#3e3e42] text-gray-400 hover:text-white flex items-center justify-center transition-colors">
+                        <span class="font-serif font-bold text-lg">T</span>
+                    </button>
+                    <div class="h-px w-8 bg-gray-700 my-1"></div>
+                    <div class="w-6 h-6 rounded-full bg-red-500 border-2 border-white cursor-pointer ring-2 ring-offset-2 ring-offset-[#252526] ring-red-500/50"></div>
+                    <div class="w-6 h-6 rounded-full bg-white cursor-pointer opacity-50 hover:opacity-100"></div>
+                </aside>
+
+                <!-- Canvas Area -->
+                <div class="flex-1 relative canvas-bg flex items-center justify-center overflow-hidden">
+                    <!-- Canvas Header overlay -->
+                    <div class="absolute top-4 left-4 right-4 flex justify-between items-center pointer-events-none">
+                        <div class="bg-[#252526] px-4 py-2 rounded-lg shadow-xl border border-black pointer-events-auto flex items-center gap-4">
+                            <span class="text-sm font-bold text-white">Feedback #2910</span>
+                            <div class="h-4 w-px bg-gray-600"></div>
+                            <span class="text-xs text-gray-400">자동 저장됨</span>
+                        </div>
+                        <div class="bg-[#252526] p-1 rounded-lg shadow-xl border border-black pointer-events-auto flex">
+                            <button class="px-3 py-1.5 rounded bg-[#007acc] text-white text-xs font-bold">Split View</button>
+                            <button class="px-3 py-1.5 rounded hover:bg-[#3e3e42] text-gray-400 hover:text-white text-xs font-bold transition-colors">Overlay</button>
+                        </div>
+                    </div>
+
+                    <!-- The Canvas -->
+                    <div class="relative shadow-2xl bg-white w-[600px] h-[800px] border-4 border-[#1e1e1e]">
+                        <!-- Background Image -->
+                        <div class="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                            <span class="text-gray-400 text-2xl font-bold">Student's Artwork</span>
+                        </div>
+                        <!-- Drawing Layer -->
+                        <div class="absolute inset-0 pointer-events-none">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <path d="M20,30 Q50,10 80,30" stroke="#ef4444" stroke-width="2" fill="none" stroke-linecap="round" />
+                                <circle cx="50" cy="50" r="10" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="4" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <aside class="w-72 bg-[#252526] border-l border-black flex flex-col flex-shrink-0">
+                    <div class="p-4 border-b border-black">
+                        <h3 class="font-bold text-white text-sm">레이어</h3>
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-2 space-y-1">
+                        <div class="p-2 rounded bg-[#37373d] flex items-center gap-3 cursor-pointer">
+                            <span class="text-xs">👁️</span>
+                            <div class="text-sm text-white font-medium">피드백 (Red)</div>
+                        </div>
+                        <div class="p-2 rounded hover:bg-[#2a2d2e] flex items-center gap-3 cursor-pointer text-gray-400">
+                            <span class="text-xs">👁️</span>
+                            <div class="text-sm font-medium">원본 이미지</div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-[#1e1e1e] border-t border-black">
+                        <button class="w-full bg-[#007acc] hover:bg-blue-600 text-white py-2.5 rounded font-bold text-sm shadow-lg transition-colors">
+                            피드백 전송하기
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+
+            // Update Nav visual
+            document.querySelectorAll('.nav-tab').forEach(el => {
+                el.classList.remove('bg-white', 'shadow-sm', 'text-neutral-900');
+                el.classList.add('text-gray-600');
+            });
+
+            const btn = document.getElementById('tab-btn-' + tabId);
+            if(btn) {
+                btn.classList.add('bg-white', 'shadow-sm', 'text-neutral-900');
+                btn.classList.remove('text-gray-600');
+            }
+        }
+
+        // Init
+        switchTab('landing');
+    </script>
+</body>
+</html>

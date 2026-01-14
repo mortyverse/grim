@@ -30,7 +30,11 @@ This functionality drives user retention and discovery.
     *   **Pagination**: Cursor-based pagination (using `created_at` or `id`) for the feed API.
 
 ## 4. Deliverables
-*   [ ] API `GET /api/feed`: Supports pagination and filters (waiting_feedback, completed).
-*   [ ] `FeedCard` Component: Handles aspect ratio display.
-*   [ ] `MasonryGrid` container.
-*   [ ] Comment Section Component with "Mentor Badge" support.
+### 5.1 Backend
+*   [ ] **Feed API**: Implement `GET /api/feed` with cursor-based pagination.
+*   [ ] **Filtering**: Add query params for `status` (All, Waiting, Completed).
+
+### 5.2 Frontend Components
+*   [ ] **Masonry Layout**: Implement responsive grid (using `react-masonry-css` or similar).
+*   [ ] **Feed Card**: specific card design showing Artwork + Title + Mentor Name.
+*   [ ] **Interaction**: Implement Comment section (with Mentor badge highlighting) and Like button.

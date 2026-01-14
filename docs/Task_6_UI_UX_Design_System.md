@@ -33,7 +33,11 @@ Given the artistic audience, the design must be **Premium, Dark Mode-first, and 
     *   Use `framer-motion` for smooth page transitions and micro-interactions (e.g., heart icon pop).
 
 ## 4. Deliverables
-*   [ ] `tailwind.config.js` setup with Brand Design Tokens.
-*   [ ] `Button`, `Input`, `Card` atomic components.
-*   [ ] `Layout` wrapper component (Header/Footer/Sidebar).
-*   [ ] Responsive Canvas Container layout proof-of-concept.
+### 6.1 Design Foundation
+*   [ ] **Tailwind Config**: Define colors (`brand-black`, `brand-primary`) and fonts in `tailwind.config.js`.
+*   [ ] **Global Styles**: Setup basic CSS reset and dark mode defaults.
+
+### 6.2 Component Library
+*   [ ] **Atoms**: Create `Button` (Variants: Primary, Ghost), `Input`, `Badge` components.
+*   [ ] **Layouts**: Create `AppShell` (Header/Mobile Tab Bar) and `Container` components.
+*   [ ] **Canvas Layout**: Create a specific full-screen layout wrapper for the Drawing Engine.

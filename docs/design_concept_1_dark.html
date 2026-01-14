@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grim - Immersive Dark Mode Concept</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#121212',
+                            surface: '#1E1E1E',
+                            border: '#333333'
+                        },
+                        brand: {
+                            primary: '#6366f1', // Indigo 500
+                            secondary: '#a855f7', // Purple 500
+                            accent: '#22d3ee' // Cyan 400
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .masonry-grid {
+            column-count: 2;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 4;
+            }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-gray-200 font-sans min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-dark-bg/80 backdrop-blur-md border-b border-dark-border z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-lg flex items-center justify-center">
+                        <span class="font-bold text-white">G</span>
+                    </div>
+                    <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Grim</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium">갤러리</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">멘토 찾기</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-md text-sm font-medium">진행중인 피드백</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-dark-surface rounded-full border border-dark-border">
+                        <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                        <span class="text-xs font-medium text-brand-accent">1,250 P</span>
+                    </div>
+                    <button class="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-200 transition-colors">질문하기</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        
+        <!-- Hero / Filter Section -->
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    실시간 피드백 <span class="text-brand-primary">갤러리</span>
+                </h1>
+                <p class="text-gray-400 max-w-xl">
+                    홍익대, 한예종 출신 멘토들의 생생한 1:1 드로잉 피드백을 확인해보세요.
+                    입시 미술의 핵심은 '어떻게 고치느냐'에 있습니다.
+                </p>
+            </div>
+            <div class="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto">
+                <button class="px-4 py-2 rounded-full bg-brand-primary text-white text-sm font-medium whitespace-nowrap">전체</button>
+                <button class="px-4 py-2 rounded-full bg-dark-surface border border-dark-border hover:border-gray-500 text-gray-300 text-sm font-medium whitespace-nowrap transition-colors">디자인</button>
+                <button class="px-4 py-2 rounded-full bg-dark-surface border border-dark-border hover:border-gray-500 text-gray-300 text-sm font-medium whitespace-nowrap transition-colors">서양화</button>
+                <button class="px-4 py-2 rounded-full bg-dark-surface border border-dark-border hover:border-gray-500 text-gray-300 text-sm font-medium whitespace-nowrap transition-colors">동양화</button>
+                <button class="px-4 py-2 rounded-full bg-dark-surface border border-dark-border hover:border-gray-500 text-gray-300 text-sm font-medium whitespace-nowrap transition-colors">조소</button>
+            </div>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="masonry-grid">
+            
+            <!-- Card 1: Feedback Preview -->
+            <div class="masonry-item relative group cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 rounded-xl">
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-brand-secondary text-white text-xs px-2 py-0.5 rounded">Before/After</span>
+                        </div>
+                        <p class="text-white font-medium truncate">금속 질감 묘사가 너무 어색해요 ㅠㅠ</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="w-6 h-6 rounded-full border border-white/30">
+                            <span class="text-xs text-gray-300">홍대디자인멘토</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Placeholder for Artwork -->
+                <div class="w-full aspect-[3/4] bg-gray-800 rounded-xl overflow-hidden border border-dark-border relative">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-600 font-bold text-xl">
+                        Artwork
+                    </div>
+                    <!-- Simulate Red Pen Correction -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-80" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M20,30 Q50,10 80,30" stroke="#ef4444" stroke-width="2" fill="none" />
+                        <circle cx="50" cy="50" r="10" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="4" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Card 2: Simple View -->
+            <div class="masonry-item relative group cursor-pointer">
+                <div class="w-full aspect-[4/3] bg-gray-800 rounded-xl overflow-hidden border border-dark-border relative">
+                     <div class="absolute inset-0 flex items-center justify-center text-gray-600 font-bold text-xl">
+                        Sketch
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <h3 class="text-sm font-medium text-gray-200">기초디자인 구도 봐주세요</h3>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            <span class="text-xs text-gray-400">답변 완료</span>
+                        </div>
+                        <span class="text-xs text-gray-500">2시간 전</span>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 3: Mentor Promo -->
+             <div class="masonry-item bg-dark-surface p-5 rounded-xl border border-brand-primary/30 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-3 opacity-10">
+                    <svg class="w-24 h-24 text-brand-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+                </div>
+                <div class="flex items-start gap-3 mb-3">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Annie" class="w-10 h-10 rounded-full bg-gray-700">
+                    <div>
+                        <h4 class="font-bold text-white">박수진 멘토</h4>
+                        <p class="text-xs text-brand-accent">서울대 서양화과 졸</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-300 mb-4 line-clamp-3">
+                    "형태력이 약한 학생들을 위해 구조부터 잡아주는 피드백을 지향합니다. 드로잉 기초가 부족하다면 저에게 오세요."
+                </p>
+                <button class="w-full py-2 rounded-lg bg-dark-bg border border-dark-border text-sm font-medium hover:bg-brand-primary hover:text-white transition-colors">
+                    프로필 보기
+                </button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="masonry-item relative group cursor-pointer">
+                <div class="w-full aspect-[3/5] bg-gray-800 rounded-xl overflow-hidden border border-dark-border relative">
+                     <div class="absolute inset-0 flex items-center justify-center text-gray-600 font-bold text-xl">
+                        Watercolor
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                    +3 Feedback
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="masonry-item relative group cursor-pointer">
+                <div class="w-full aspect-square bg-gray-800 rounded-xl overflow-hidden border border-dark-border relative">
+                     <div class="absolute inset-0 flex items-center justify-center text-gray-600 font-bold text-xl">
+                        Design
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Floating Action Button (Mobile) -->
+    <button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-brand-primary text-white rounded-full shadow-lg shadow-brand-primary/40 flex items-center justify-center text-2xl">
+        +
+    </button>
+
+</body>
+</html>

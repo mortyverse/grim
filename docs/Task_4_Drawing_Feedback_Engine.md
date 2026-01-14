@@ -35,8 +35,12 @@ This is the **USP (Unique Selling Point)** of the platform.
 *   **Mobile Support**: Touch events must be distinguished from scroll/zoom gestures.
 
 ## 4. Deliverables
-*   [ ] Reusable `CanvasEditor` Component (React/Vue/etc.).
-*   [ ] Tool Toolbar UI (Brush, Eraser, Color Picker).
-*   [ ] Logic to load image from URL into Canvas background.
-*   [ ] "Save Feedback" function generating a PNG blob.
-*   [ ] "Comparison Viewer" Component for the result page.
+### 4.1 Canvas Engine (Core)
+*   [ ] **Setup**: Initialize Fabric.js/Konva.js canvas instance.
+*   [ ] **Image Loading**: Implement logic to load "Student Layer" (Background) from URL (CORS handling).
+*   [ ] **Drawing Logic**: Implement Brush and Eraser tools with adjustable size/color.
+
+### 4.2 Feedback Interface
+*   [ ] **Toolbar UI**: Floating or Sidebar palette for selecting tools.
+*   [ ] **Save Pipeline**: Implement `exportToBlob()` to generate PNG of the *Feedback Layer* only.
+*   [ ] **Comparison Viewer**: Implement "Before/After" slider component for the feedback result page.
